@@ -10,7 +10,7 @@ class Index:
 
 	def lookup(self, term):
 		try: return self.index[term]
-		except KeyError: return set() 
+		except KeyError: return set()
 
 class DatabaseIndex:
 	'''An index specifically for the file database'''
@@ -22,7 +22,6 @@ class DatabaseIndex:
 		self.tagIndex.add(identity, entry.tags)
 		self.textIndex.add(identity, entry.text.split())
 		self.propertyIndex.add(identity, entry.properties.keys())
-
 
 	def lookup(self, term):
 		return \

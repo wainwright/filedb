@@ -4,7 +4,6 @@ from datetime import datetime
 
 from Entry import Entry
 from Database import Database
-from Index import *
 
 import sys
 
@@ -31,17 +30,13 @@ d.addEntry(
 			properties={'value':140.0, 'date':datetime(2014, 12, 9)},
 			text='jeans $140'))
 
-index = DatabaseIndex()
-
-for i in d.data:
-	index.add(i, d.data[i])
 print('LOOKUP:')
 print('------------------------------')
-print('receipt:\n', [d.data[j] for j in index.lookup('receipt')])
+print('receipt:\n', d.lookup('receipt'))
 print('------------------------------')
-print('tax:\n',     [d.data[j] for j in index.lookup('tax')])
+print('tax:\n',     d.lookup('tax'))
 print('------------------------------')
-print('myer:\n',    [d.data[j] for j in index.lookup('myer')])
+print('myer:\n',    d.lookup('myer'))
 sys.exit(0)
 
 # TEST the properties

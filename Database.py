@@ -1,3 +1,5 @@
+from Index import *
+
 class UniqueId:
 	count = 0
 	def get(self):
@@ -7,9 +9,15 @@ class UniqueId:
 class Database:
 	data = {}
 	idGenerator = UniqueId()
+	index = DatabaseIndex()
 
 	def addEntry(self, entry):
-		self.data[self.idGenerator.get()] = entry;
+		newId = self.idGenerator.get()
+		self.data[newId] = entry
+		self.index.add(newId, entry)
+
+	def lookup(self, term):
+		return [self.data[j] for j in self.index.lookup(term)]
 
 	def __str__(self):
 		return self.data.__str__()
