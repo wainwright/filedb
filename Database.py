@@ -11,6 +11,7 @@ class Database:
 	idGenerator = UniqueId()
 	index = DatabaseIndex()
 
+	# todo should be atomic
 	def addEntry(self, entry):
 		newId = self.idGenerator.get()
 		self.data[newId] = entry
