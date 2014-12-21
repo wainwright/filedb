@@ -1,14 +1,14 @@
 class Entry:
-	path = ''
-	tags = set()
-	properties = dict()
-	text = ''
 
-	def __init__(self, path, tags=set(), properties=dict(), text=''):
+	def __init__(self, path, tags=set(), properties=dict(), text=None):
 		self.path = path
-		self.tags = tags
+		self.tags = set(tags)
 		self.properties = properties
-		self.text = text
+		if text is None:
+			with open(path, 'rb') as f:
+				self.text = f.read()
+		else:
+			self.text = text
 
 	def addTag(self, *tags):
 		print(tags)

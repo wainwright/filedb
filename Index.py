@@ -1,6 +1,8 @@
 class Index:
 	'''A generic index '''
-	index = {}
+
+	def __init__(self):
+		self.index = {}
 
 	def add(self, key, entries):
 		for e in entries:
@@ -14,9 +16,10 @@ class Index:
 
 class DatabaseIndex:
 	'''An index specifically for the file database'''
-	tagIndex = Index()
-	textIndex = Index()
-	propertyIndex = Index()
+	def __init__(self):
+		self.tagIndex = Index()
+		self.textIndex = Index()
+		self.propertyIndex = Index()
 
 	def add(self, identity, entry):
 		self.tagIndex.add(identity, entry.tags)

@@ -1,15 +1,43 @@
 from Index import *
 
+import os
+import pickle
+
+_defaultPath = os.path.expanduser('~/.filedb')
+_dbFilename = 'db.pickle'
+
 class UniqueId:
-	count = 0
+	def __init__(self):
+		self.count = 0
+
 	def get(self):
 		self.count += 1
 		return self.count
 
+def loadDb(path=_defaultPath, createIfNotFound=True):
+	# create the directory if not present
+	if not os.path.exists(_defaultPath):
+		os.makedirs(_defaultPath)
+	# open the file
+	try:
+		with open(path + '/' + _dbFilename, 'rb') as f:
+			return pickle.load(f)
+	except IOError:
+		if createIfNotFound:
+			return Database()
+		else:
+			raise
+
 class Database:
-	data = {}
-	idGenerator = UniqueId()
-	index = DatabaseIndex()
+
+	def __init__(self):
+		self.data = {}
+		self.idGenerator = UniqueId()
+		self.index = DatabaseIndex()
+
+	def save(self, path=_defaultPath):
+		with open(path + '/' + _dbFilename, 'wb') as f:
+			pickle.dump(self, f);
 
 	# todo should be atomic
 	def addEntry(self, entry):
