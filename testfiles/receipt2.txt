@@ -1,0 +1,7 @@
+WOOLWORTHS
+
+juice 3.40
+grapes 10.00
+hat 3@2.00 6.00
+
+total 19.40
